@@ -7,7 +7,7 @@ from sqlalchemy.engine import URL, Engine
 # --- CENTRALIZED DATABASE CONFIGURATION ---
 # Replace these with your actual MySQL credentials and connection details
 DB_USER = 'root'
-DB_PASS = 'Silvers123@_@'  
+DB_PASS = 'password'  
 DB_HOST = 'localhost'
 DB_NAME = 'midterm_vn_firm_panel'
 
