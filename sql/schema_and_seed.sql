@@ -458,6 +458,24 @@ TRUNCATE TABLE fact_data_snapshot;
 TRUNCATE TABLE fact_value_override_log;
 TRUNCATE TABLE dim_firm; 
 
+-- GROUP SEED DATA --
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+INSERT INTO dim_firm (ticker, company_name, exchange_id, industry_l2_id) 
+VALUES 
+('TEST', 'Test Corporation (For System Testing)', 1, 5),
+('VTP', 'Viettel Post Joint Stock Corporation', 1, 10),
+('PLC', 'Petrolimex Petrochemical Corporation - JSC', 2, 1),
+('DHT', 'Ha Tay Pharmaceutical Joint Stock Company', 2, 9),
+('ACG', 'An Cuong Wood - Working Joint Stock Company', 1, 1),
+('RAL', 'Rang Dong Light Source and Vacuum Flask Joint Stock Company', 1, 5),
+('SRC', 'Sao Vang Rubber Joint Stock Company', 1, 8),
+('TMS', 'Transimex Corporation', 1, 10),
+('CTR', 'Viettel Construction Joint Stock Corporation', 1, 11),
+('SLS', 'Son La Sugar Joint Stock Company', 2, 2),
+('PMC', 'Pharmedic Pharmaceutical Medicinal Joint Stock Company', 2, 9);
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- CREATE MASTER VIEW (VW_FIRM_PANEL_LATEST)
