@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: vn_firm_panel
+-- Host: 127.0.0.1  
 -- ------------------------------------------------------
 -- Server version	8.4.7
 
@@ -436,18 +436,16 @@ UNLOCK TABLES;
 
 -- Dump completed on 2026-01-22  1:31:50
 
--- ======================================================
--- BỔ SUNG CÁC NGÀNH CÒN THIẾU CHO NHÓM
--- ======================================================
+-- APPEND MISSING INDUSTRIES
+
 INSERT INTO dim_industry_l2 (industry_l2_id, industry_l2_name) 
 VALUES 
 (10, 'Vận tải'),
 (11, 'Viễn thông')
 ON DUPLICATE KEY UPDATE industry_l2_name = VALUES(industry_l2_name);
 
--- ======================================================
--- DỌN SẠCH DỮ LIỆU MẪU CỦA THẦY ĐỂ CHUẨN BỊ CHẠY ETL
--- ======================================================
+-- CLEAR SAMPLE DATA IN PREPARATION FOR ETL RUN
+
 SET FOREIGN_KEY_CHECKS = 0;
 
 TRUNCATE TABLE fact_cashflow_year;
@@ -458,13 +456,11 @@ TRUNCATE TABLE fact_innovation_year;
 TRUNCATE TABLE fact_firm_year_meta;
 TRUNCATE TABLE fact_data_snapshot;
 TRUNCATE TABLE fact_value_override_log;
-TRUNCATE TABLE dim_firm; -- Dọn sạch 400 công ty mẫu để Python nạp đúng 20 công ty của nhóm
+TRUNCATE TABLE dim_firm; 
 
 SET FOREIGN_KEY_CHECKS = 1;
 
--- ======================================================
--- TẠO MASTER VIEW (VW_FIRM_PANEL_LATEST)
--- ======================================================
+-- CREATE MASTER VIEW (VW_FIRM_PANEL_LATEST)
 CREATE OR REPLACE VIEW vw_firm_panel_latest AS
 WITH LatestSnapshots AS (
     SELECT firm_id, fiscal_year, MAX(snapshot_id) AS max_snap
@@ -474,8 +470,8 @@ WITH LatestSnapshots AS (
 SELECT 
     f.ticker, 
     ls.fiscal_year,
-    
-    -- 1. BẢNG FINANCIAL 
+    -- TABLES
+    -- 1. FINANCIAL 
     fin.net_sales, fin.total_assets, fin.selling_expenses, fin.general_admin_expenses,
     fin.intangible_assets_net, fin.manufacturing_overhead, fin.net_operating_income,
     fin.raw_material_consumption, fin.merchandise_purchase_year, fin.wip_goods_purchase,
@@ -484,20 +480,20 @@ SELECT
     fin.long_term_debt, fin.current_assets, fin.current_liabilities, fin.growth_ratio,
     fin.inventory, fin.net_ppe,
     
-    -- 2. BẢNG OWNERSHIP 
+    -- 2. OWNERSHIP 
     own.managerial_inside_own, own.state_own, own.institutional_own, own.foreign_own,
     
-    -- 3. BẢNG CASHFLOW 
+    -- 3. CASHFLOW 
     cf.net_cfo, cf.capex, cf.net_cfi,
     
-    -- 4. BẢNG MARKET 
+    -- 4. MARKET 
     mkt.shares_outstanding, mkt.price_reference, mkt.share_price,
     mkt.market_value_equity, mkt.dividend_cash_paid, mkt.eps_basic,
     
-    -- 5. BẢNG INNOVATION 
+    -- 5. INNOVATION 
     inv.product_innovation, inv.process_innovation,
     
-    -- 6. BẢNG META 
+    -- 6. META 
     meta.employees_count, meta.firm_age
 
 FROM dim_firm f
