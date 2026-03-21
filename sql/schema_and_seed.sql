@@ -4,6 +4,9 @@
 -- ------------------------------------------------------
 -- Server version	8.4.7
 
+CREATE DATABASE IF NOT EXISTS midterm_vn_firm_panel;
+USE midterm_vn_firm_panel;
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
