@@ -464,7 +464,6 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 INSERT INTO dim_firm (ticker, company_name, exchange_id, industry_l2_id) 
 VALUES 
-('TEST', 'Test Corporation (For System Testing)', 1, 5),
 ('VTP', 'Viettel Post Joint Stock Corporation', 1, 10),
 ('PLC', 'Petrolimex Petrochemical Corporation - JSC', 2, 1),
 ('DHT', 'Ha Tay Pharmaceutical Joint Stock Company', 2, 9),
