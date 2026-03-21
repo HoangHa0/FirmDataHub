@@ -24,8 +24,8 @@ TEAM_[5]_FirmDataHub/
 │   └── export_panel.py          # Extracts the clean dataset (latest snapshots) to a CSV file for analysis.
 │
 ├── data/
-│   ├── team_tickers.csv         # The finalized list of the 20 assigned stock tickers.
-│   ├── firms.xlsx               # The metadata/catalog of the 20 companies.
+│   ├── team_tickers.csv         # The finalized list of the 10 assigned stock tickers.
+│   ├── firms.xlsx               # The metadata/catalog of the 10 companies.
 │   └── panel_2020_2024.xlsx     # The 5-year panel data file containing 38 variables.
 │
 ├── outputs/
